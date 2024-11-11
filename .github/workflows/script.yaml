@@ -28,6 +28,7 @@ jobs:
       - name: Run the compiled executable
         run: |
           # 对于 Linux/macOS 环境
+          ls ./
           if [ "$RUNNER_OS" == "Linux" ]; then
             ./ss  # 运行已编译的可执行文件
           fi
