@@ -9,33 +9,7 @@ on:
       - main  # 当创建 PR 到 main 分支时触发
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-latest  # 在 Ubuntu 上编译
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3  # 获取代码
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyinstaller requests pyaes
-
-      - name: Compile for Linux
-        run: pyinstaller --onefile ss.py
-
-      - name: Upload Linux Executable
-        uses: actions/upload-artifact@v3
-        with:
-          name: ss-linux
-          path: ./ss  # 上传生成的可执行文件
-
-  build-macos:
+  build:
     runs-on: macos-latest  # 在 macOS 上编译
 
     steps:
@@ -47,42 +21,8 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyinstaller requests pyaes
-
-      - name: Compile for macOS
-        run: pyinstaller --onefile ss.py
-
       - name: Upload macOS Executable
         uses: actions/upload-artifact@v3
         with:
           name: ss-macos
           path: ./ss  # 上传生成的可执行文件
-
-  build-windows:
-    runs-on: windows-latest  # 在 Windows 上编译
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3  # 获取代码
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyinstaller requests pyaes
-
-      - name: Compile for Windows
-        run: pyinstaller --onefile ss.py
-
-      - name: Upload Windows Executable
-        uses: actions/upload-artifact@v3
-        with:
-          name: ss-windows
-          path: ./ss.exe  # 上传生成的可执行文件
