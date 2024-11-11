@@ -1,0 +1,25 @@
+name: Run ss executable
+
+on:
+  push:
+    branches:
+      - main  # 你可以根据需要修改为其他分支
+  pull_request:
+    branches:
+      - main  # 你可以根据需要修改为其他分支
+
+jobs:
+  run-ss:
+    runs-on: ubuntu-latest  # 选择合适的操作系统
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Make ss executable
+        run: |
+          chmod +x ./ss  # 使 ss 文件具有可执行权限
+
+      - name: Run ss executable
+        run: |
+          ./ss  # 运行 ss 可执行文件
