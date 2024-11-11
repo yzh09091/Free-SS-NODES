@@ -1,4 +1,4 @@
-name: Build PyInstaller Executables for Multiple Platforms
+name: 自动获取ss节点
 
 on:
   workflow_dispatch:  # 使工作流支持手动触发
