@@ -1,25 +1,38 @@
-name: Run ss executable
+name: Run PyInstaller Executable
 
 on:
   push:
     branches:
-      - main  # 你可以根据需要修改为其他分支
+      - main  # 当推送到 main 分支时执行
   pull_request:
     branches:
-      - main  # 你可以根据需要修改为其他分支
+      - main  # 当创建 PR 到 main 分支时执行
 
 jobs:
-  run-ss:
-    runs-on: ubuntu-latest  # 选择合适的操作系统
+  run-executable:
+    runs-on: ubuntu-latest  # 使用 Ubuntu 环境
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3  # 获取仓库代码
 
-      - name: Make ss executable
-        run: |
-          chmod +x ./ss  # 使 ss 文件具有可执行权限
+      - name: Set up Python (optional)
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # 如果你的脚本还需要 Python 环境
 
-      - name: Run ss executable
+      - name: Make executable file executable (if on Linux)
+        if: runner.os == 'Linux'
+        run: chmod +x ./ss  # 在 Linux 上需要给文件执行权限
+
+      - name: Run the compiled executable
         run: |
-          ./ss  # 运行 ss 可执行文件
+          # 对于 Linux/macOS 环境
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            ./ss  # 运行已编译的可执行文件
+          fi
+
+          # 对于 Windows 环境
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            ./ss.exe  # 运行已编译的可执行文件
+          fi
