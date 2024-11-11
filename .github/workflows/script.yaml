@@ -21,8 +21,5 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Upload macOS Executable
-        uses: actions/upload-artifact@v3
-        with:
-          name: ss-macos
-          path: ./ss  # 上传生成的可执行文件
+      - name: 执行文件
+        run: ./ss
