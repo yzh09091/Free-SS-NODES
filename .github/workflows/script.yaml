@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: latest  #运行ss脚本
+    runs-on: macos-latest  #
 
     steps:
       - name: 执行文件点击打开获取ss节点信息
